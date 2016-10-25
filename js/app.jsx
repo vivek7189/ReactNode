@@ -1,16 +1,35 @@
-import React from 'react';
+import React,{Component, PropTypes} from 'react';
+import ReactDOM from 'react-dom';
+
 import Hello from './components/hello.jsx';
+import Toggle from './toggleComp/toggleMain.jsx';
 
-var App = React.createClass({
-	handleClick: function () {
-		window.alert('clicked');
-	},
-
-	render: function () {
-		return (
-			<Hello onClick={this.handleClick}></Hello>
-		);
+class App extends React.Component {
+	constructor(props){
+		super(props)
+		this.state={
+			checked:true		
+		}
 	}
-});
+	render () {
+		console.log('App',this);
+		return (
+				<Toggle />
+		)
+	}
+}
+App.propTypes = {
+  status: React.PropTypes.string.isRequired,
+};
+App.defaultProps ={
+	status1:'fi'
+}
+ReactDOM.render(<App status="main"></App>, document.getElementById('app'));
 
-React.render(<App></App>, document.getElementById('app'));
+
+
+
+
+function isElementFullyVisible(el){
+    var pos = el.getBoundingClientRect();
+}

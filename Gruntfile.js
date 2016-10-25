@@ -32,14 +32,34 @@ module.exports = function (grunt) {
 					open: true
 				}
 			}
+		},
+		express :{
+			dev:{
+				options: {
+					script: 'server.js'
+				}
+			}
+		},
+		minified : {
+			files: {
+				src: [
+				'build/app.js',
+				],
+				dest: 'build/min/'
+			},
+			options : {
+				sourcemap: false,
+				allinone: false
+			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-browserify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-connect');
-
-	grunt.registerTask('start:dev', ['browserify', 'connect', 'watch']);
+    grunt.loadNpmTasks('grunt-express-server');
+	grunt.loadNpmTasks('grunt-minified');
+	grunt.registerTask('start:dev', ['browserify', 'express', 'watch']);
 
 	grunt.registerTask('default', 'browserify');
 };
